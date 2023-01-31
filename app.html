@@ -84,7 +84,7 @@ fetch("https://script.google.com/macros/s/AKfycbyP00eK7qQOlyl3itYSCwbUNOelHzmMum
 
   }
 
-  if(sessionStorage.length===1){
+  if(sessionStorage.length){
       var cache = JSON.stringify(sessionStorage);
       cache = JSON.parse(cache);
       var cacheA;
