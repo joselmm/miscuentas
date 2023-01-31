@@ -59,8 +59,6 @@ fetch("https://script.google.com/macros/s/AKfycbyP00eK7qQOlyl3itYSCwbUNOelHzmMum
 }).then((json)=>{
        console.log(json)
   if(json.res==='ok'){
-   sessionStorage.setItem("urlBD", json.urlBD);
-      sessionStorage.setItem("sheetJson", json.sheetJson);
  sessionStorage.setItem(json.cache, JSON.stringify(json));
   }
 
