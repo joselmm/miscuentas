@@ -30,7 +30,7 @@
   <div class="mb-3">
     <label for="passwordInput" class="form-label">Password</label>
     <input required type="password" class="form-control" id="passwordInput">
-<label  hidden id="aviso"class="form-label" style='color:red'>Credenciales Incorrectas</label>
+<div  hidden id="aviso" class="form-label" style='color:red'>Credenciales Incorrectas</div>
   </div>
   <button id="submit-btn" type="submit" class="btn btn-primary">Submit</button>
 </form>
@@ -69,7 +69,7 @@ var aviso = document.getElementById("aviso");
         $("#body").load(json.prime);
 		
 	if(json.res==='no'){
- 		aviso.hidden=false;
+ 		aviso.hidden="false";
   	}
   	}
 
