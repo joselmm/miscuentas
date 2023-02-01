@@ -22,7 +22,7 @@
 </head>
 <body id="body">
 
-<form>
+<form id="login" hidden>
   <div class="mb-3">
     <label for="emailInput" class="form-label">Email address</label>
     <input type="email" class="form-control" id="emailInput" aria-describedby="emailHelp">
@@ -38,6 +38,7 @@
 <script type="text/javascript">
 
   if (sessionStorage.length===0){
+	   document.getElementById("login").hidden=false;
   var emailInput = document.getElementById("emailInput");
   var passwordInput = document.getElementById("passwordInput");
   var submitBtn = document.getElementById("submit-btn");
