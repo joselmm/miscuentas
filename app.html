@@ -48,11 +48,11 @@ var aviso = document.getElementById("aviso");
   var submitBtn = document.getElementById("submit-btn");
 
 	emailInput.onfocus=()=>{
-	if(aviso.hidden){aviso.hidden=false}
+	if(!aviso.hidden){aviso.hidden=true}
 	}
 	 
 	passwordInput.onfocus=()=>{
-	if(aviso.hidden){aviso.hidden=false}
+	if(!aviso.hidden){aviso.hidden=true}
 	} 
 	  
       form.onsubmit
