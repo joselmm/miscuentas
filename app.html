@@ -25,47 +25,50 @@
 <form>
   <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">Email address</label>
-    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+    <input type="email" class="form-control" id="emailInput" aria-describedby="emailHelp">
     <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
   </div>
   <div class="mb-3">
-    <label for="exampleInputPassword1" class="form-label">Password</label>
+    <label for="passwordInput" class="form-label">Password</label>
     <input type="password" class="form-control" id="exampleInputPassword1">
   </div>
-  <div class="mb-3 form-check">
-    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-    <label class="form-check-label" for="exampleCheck1">Check me out</label>
-  </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <button id="submit-btn" type="submit" class="btn btn-primary">Submit</button>
 </form>
 
 
 <script type="text/javascript">
 
   if (sessionStorage.length===0){
-  var result = window.prompt("user");
-  var password = window.prompt("password");
-  
-  fm= new FormData()
-  fm.append("data",'{"user":"'+result+'","password":"'+password+'"}')
+  var emailInput = document.getElementById("emailInput");
+  var passwordInput = document.getElementById("passwordInput");
+  var submitBtn = document.getElementById("submit-btn");
+      
+      submitBtn.onclick = ()=>{
+      
+      
+ 	 fm= new FormData()
+  	fm.append("data",'{"user":"'+emailInput.value+'","password":"'+passwordInput.value+'"}')
 
 
-fetch("https://script.google.com/macros/s/AKfycbzwaoKPhE9O0a1cOFurgvI8QZf4TzTfiSK9e14XVurj2jRU-io9uSSH2jh5LlKx4Ozt/exec",{
-    method:"POST",
-    body:fm
-}).then((res)=>{
-    return res.json()
-}).then((json)=>{
-       console.log(json)
-  if(json.res==='ok'){
- sessionStorage.setItem("cache", JSON.stringify(json));
-  }
+	fetch("https://script.google.com/macros/s/AKfycbzwaoKPhE9O0a1cOFurgvI8QZf4TzTfiSK9e14XVurj2jRU-io9uSSH2jh5LlKx4Ozt/exec",{
+    	method:"POST",
+    	body:fm
+	}).then((res)=>{
+    		return res.json()
+	}).then((json)=>{
+       		console.log(json)
+  	if(json.res==='ok'){
+ 	sessionStorage.setItem("cache", JSON.stringify(json));
+  	}
 
-  if(sessionStorage.getItem("cache")){
+  	if(sessionStorage.getItem("cache")){
         $("#body").load(json.prime);
-  }
+  	}
 
   })
+      
+      }
+  
 
   }
 
