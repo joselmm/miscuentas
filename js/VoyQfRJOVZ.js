@@ -444,7 +444,7 @@ var interval_ID = setInterval(function_ID,0)
 var revisados= [];
 
 var revisar = function(){
-
+	document.querySelector("#revisar-popup").scrollIntoView()
         var buttonDeslizar = document.getElementById("button-deslizar");
         
 
