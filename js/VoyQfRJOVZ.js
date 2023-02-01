@@ -1,8 +1,8 @@
 
 
 
-const urlBD = sessionStorage.getItem("urlBD");
-const sheetJson = sessionStorage.getItem("sheetJson");
+const urlBD = JSON.parse(sessionStorage.getItem("cache")).urlBD;
+const sheetJson = JSON.parse(sessionStorage.getItem("cache")).sheetJson;
 
 var jsData;
 fetch(sheetJson).then((res)=>{
