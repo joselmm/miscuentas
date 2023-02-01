@@ -46,6 +46,15 @@ var aviso = document.getElementById("aviso");
 	emailInput.focus();
   var passwordInput = document.getElementById("passwordInput");
   var submitBtn = document.getElementById("submit-btn");
+
+	emailInput.onfocus=()=>{
+	if(aviso.hidden){aviso.hidden=false}
+	}
+	 
+	passwordInput.onfocus=()=>{
+	if(aviso.hidden){aviso.hidden=false}
+	} 
+	  
       form.onsubmit
        = (e)=>{
       
@@ -66,6 +75,7 @@ var aviso = document.getElementById("aviso");
   	}
 	if(json.res==='no'){
  		aviso.hidden=false;
+		setTimeout(()=>{aviso.hidden=true;},3000)
   	}
 
   	if(sessionStorage.getItem("cache")){
