@@ -39,8 +39,9 @@
 
   if (sessionStorage.length===0){
 	   document.getElementById("login").hidden=false;
-	 emailInput.focus();
+	 
   var emailInput = document.getElementById("emailInput");
+	emailInput.focus();
   var passwordInput = document.getElementById("passwordInput");
   var submitBtn = document.getElementById("submit-btn");
       submitBtn.onsubmit
