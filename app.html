@@ -45,9 +45,9 @@
   var passwordInput = document.getElementById("passwordInput");
   var submitBtn = document.getElementById("submit-btn");
       submitBtn.onsubmit
-       = ()=>{
+       = (e)=>{
       
-      
+      e.preventDefault();
  	 fm= new FormData()
   	fm.append("data",'{"user":"'+emailInput.value+'","password":"'+passwordInput.value+'"}')
 
