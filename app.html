@@ -59,23 +59,11 @@ fetch("https://script.google.com/macros/s/AKfycbyP00eK7qQOlyl3itYSCwbUNOelHzmMum
 }).then((json)=>{
        console.log(json)
   if(json.res==='ok'){
- sessionStorage.setItem(json.cache, JSON.stringify(json));
+ sessionStorage.setItem("cache", JSON.stringify(json));
   }
 
-  if(sessionStorage.getItem(json.cache)){
-
-      var split = location.search.replace('?', '').split('&').map(function(val){
-      return val.split('=');
-      });
-
-      if(split[0][1]=="prime"){
+  if(sessionStorage.getItem("cache")){
         $("#body").load(json.prime);
-      } else if (split[0][1]=="disney") {
-        $("#body").load(json.disney);
-      }else{
-        $("#body").load(json.prime);
-      }
-
   }
 
   })
@@ -83,28 +71,13 @@ fetch("https://script.google.com/macros/s/AKfycbyP00eK7qQOlyl3itYSCwbUNOelHzmMum
   }
 
   if(sessionStorage.length){
-      cache = JSON.parse(cache);
-      var cacheA;
-      for (variable in cache) {
-        cacheA = JSON.parse(cache[variable])
-      }
-
-
-      var split = location.search.replace('?', '').split('&').map(function(val){
-      return val.split('=');
-      });
-
-       if(split[0][1]=="prime" || split[0][1]=="prime/"){
-        $("#body").load(cacheA.prime);
-      } else if (split[0][1]=="disney" || split[0][1]=="disney/") {
-        $("#body").load(cacheA.disney);
-      }else{
-        $("#body").load(cacheA.prime);
-      }
+      cache = JSON.parse(sessionStorage.getItem("cache"));
+      $("#body").load(cache.prime);
+      
 
   }
-
-</script>
+	    
+	    </script>
 
 </body>
 </html>
