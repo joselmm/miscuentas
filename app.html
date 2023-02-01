@@ -30,6 +30,7 @@
   <div class="mb-3">
     <label for="passwordInput" class="form-label">Password</label>
     <input type="password" class="form-control" id="passwordInput">
+<label  hidden id="aviso"class="form-label" style='color:red'>Credenciales Incorrectas</label>
   </div>
   <button id="submit-btn" type="submit" class="btn btn-primary">Submit</button>
 </form>
@@ -40,7 +41,7 @@
   if (sessionStorage.length===0){
 	   var form=document.getElementById("login");
 	  form.hidden=false;
-	 
+var aviso = document.getElementById("aviso");	 
   var emailInput = document.getElementById("emailInput");
 	emailInput.focus();
   var passwordInput = document.getElementById("passwordInput");
@@ -66,6 +67,10 @@
 
   	if(sessionStorage.getItem("cache")){
         $("#body").load(json.prime);
+		
+	if(json.res==='no'){
+ 		aviso.hidden=false;
+  	}
   	}
 
   })
