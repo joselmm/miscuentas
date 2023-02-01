@@ -62,7 +62,7 @@ fetch("https://script.google.com/macros/s/AKfycbzwaoKPhE9O0a1cOFurgvI8QZf4TzTfiS
  sessionStorage.setItem("cache", JSON.stringify(json));
   }
 
-  if(sessionStorage.setItem("cache")){
+  if(sessionStorage.getItem("cache")){
         $("#body").load(json.prime);
   }
 
