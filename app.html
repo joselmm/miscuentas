@@ -38,7 +38,7 @@
 
 <script type="text/javascript">
 
-  if (sessionStorage.length===0){
+  if (sessionStorage.length===0 ||  !sessionStorage.getItem("platform").includes("joselmm.github.io/miscuentas")){
 	   var form=document.getElementById("login");
 	  form.hidden=false;
 var aviso = document.getElementById("aviso");	 
@@ -72,6 +72,7 @@ var aviso = document.getElementById("aviso");
        		console.log(json)
   	if(json.res==='ok'){
  	sessionStorage.setItem("cache", JSON.stringify(json));
+	sessionStorage.setItem("platform", "joselmm.github.io/miscuentas");
   	}
 	if(json.res==='no'){
  		aviso.hidden=false;
@@ -90,8 +91,8 @@ var aviso = document.getElementById("aviso");
 
   }
 
-  if(sessionStorage.length){
-      cache = JSON.parse(sessionStorage.getItem("cache"));
+  if(sessionStorage.length && sessionStorage.getItem("platform").includes("joselmm.github.io/miscuentas")){
+	  cache = JSON.parse(sessionStorage.getItem("cache"));
       $("#body").load(cache.prime);
       
   }
