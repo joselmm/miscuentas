@@ -444,13 +444,22 @@ var interval_ID = setInterval(function_ID,0)
 var revisados= [];
 
 var revisar = function(){
-	document.querySelector("#revisar-popup").scrollIntoView()
+	
         var buttonDeslizar = document.getElementById("button-deslizar");
-        
+        var dateToday = new Date();
+	dateToday.setHours(0)
+	dateToday.setMilliseconds(0)
+	dateToday.setMinutes(0)
+	dateToday.setSeconds(0)
 
     for (let i = 0; i< SSCONN.primevideoDB.length; i++){
-    
-        if(25 <= SSCONN.primevideoDB[i].Dias_Vigentes && SSCONN.primevideoDB[i].Dias_Vigentes < 28){
+    	var dateArray = SSCONN.primevideoDB[i].Fecha_Finalizacion.split(" ");
+	var endingDate = new Date(dateArray[2],meses.map((mes)=>mes.toLowerCase()).indexOf(dateArray[1]),dateArray[0]);
+	var diasFaltantes = (dateToday.getTime()-endingDate.getTime())/86400000
+	    
+	    
+	    
+        if(-5 <= diasFaltantes && diasFaltantes <= -3){
             var message = SSCONN.primevideoDB[i].Nombre + " SE LE ACABARÁ su plan \"" + SSCONN.primevideoDB[i].ESTADO +"\"\n ID: "+SSCONN.primevideoDB[i].id+" el PRÓXIMO "+ SSCONN.primevideoDB[i].Fecha_Finalizacion;
             
             revisados.push({
@@ -460,7 +469,7 @@ var revisar = function(){
             })
             
             
-        } else if( 28 <= SSCONN.primevideoDB[i].Dias_Vigentes && 29>SSCONN.primevideoDB[i].Dias_Vigentes){
+        } else if( -2 == diasFaltantes){
             var message = SSCONN.primevideoDB[i].Nombre + " SE LE ACABARÁ su plan \"" + SSCONN.primevideoDB[i].ESTADO +"\"\n ID: "+SSCONN.primevideoDB[i].id+" PASADO MAÑANA "+ SSCONN.primevideoDB[i].Fecha_Finalizacion;
             
             revisados.push({
@@ -469,7 +478,7 @@ var revisar = function(){
 			  'vigencia':SSCONN.primevideoDB[i].Dias_Vigentes
             })
             
-        } else if( 29 <= SSCONN.primevideoDB[i].Dias_Vigentes && 30>SSCONN.primevideoDB[i].Dias_Vigentes){
+        } else if( -1 == diasFaltantes){
             var message = SSCONN.primevideoDB[i].Nombre + " SE LE ACABARÁ su plan \"" + SSCONN.primevideoDB[i].ESTADO +"\"\n ID: "+SSCONN.primevideoDB[i].id+" MAÑANA "+ SSCONN.primevideoDB[i].Fecha_Finalizacion;
             
             revisados.push({
@@ -478,7 +487,7 @@ var revisar = function(){
 			  'vigencia':SSCONN.primevideoDB[i].Dias_Vigentes
             })
             
-        }else if(30 <= SSCONN.primevideoDB[i].Dias_Vigentes && SSCONN.primevideoDB[i].Dias_Vigentes < 31){
+        }else if(0==diasFaltantes){
             var message = SSCONN.primevideoDB[i].Nombre + " se le ACABÓ su plan \"" + SSCONN.primevideoDB[i].ESTADO +"\"\n ID: "+SSCONN.primevideoDB[i].id+" HOY "+ SSCONN.primevideoDB[i].Fecha_Finalizacion;
             
             
@@ -487,7 +496,7 @@ var revisar = function(){
                     'message':message,
 			  'vigencia':SSCONN.primevideoDB[i].Dias_Vigentes
             })
-        } else if(31 <= SSCONN.primevideoDB[i].Dias_Vigentes && 32 > SSCONN.primevideoDB[i].Dias_Vigentes){
+        } else if(1==diasFaltantes){
            
                      var message = SSCONN.primevideoDB[i].Nombre + " se le ACABÓ su plan \"" + SSCONN.primevideoDB[i].ESTADO +"\"\n ID: "+SSCONN.primevideoDB[i].id+" AYER "+ SSCONN.primevideoDB[i].Fecha_Finalizacion;
             
@@ -497,7 +506,7 @@ var revisar = function(){
                     'message':message,
 			  'vigencia':SSCONN.primevideoDB[i].Dias_Vigentes
             })
-         }else if(40 >= SSCONN.primevideoDB[i].Dias_Vigentes && 32 <= SSCONN.primevideoDB[i].Dias_Vigentes){
+         }else if(2<=diasFaltantes && diasFaltantes<=7){
            
                      var message = SSCONN.primevideoDB[i].Nombre + " se le ACABÓ su plan \"" + SSCONN.primevideoDB[i].ESTADO +"\"\n ID: "+SSCONN.primevideoDB[i].id+" el "+ SSCONN.primevideoDB[i].Fecha_Finalizacion;
             
