@@ -703,10 +703,11 @@ document.querySelector("#button-log-out").onclick = () => {
 
   localStorage.clear();
   sessionStorage.clear();
-  var urlHome = "https://" + platformUrl;
-  if (urlHome === location.href) {
+  //var urlHome = "https://" + platformUrl;
+  location.reload()
+ /*  if (location.href.includes(urlHome)) {
     location.reload();
     return;
   }
-  location.href = urlHome;
+  location.href = urlHome; */
 };
