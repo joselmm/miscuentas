@@ -1,5 +1,8 @@
-const urlBD = JSON.parse(sessionStorage.getItem("cache")).urlBD;
-const sheetJson = JSON.parse(sessionStorage.getItem("cache")).sheetJson;
+var cacheParcial =
+  sessionStorage.getItem("cache") || localStorage.getItem("cache");
+
+const urlBD = JSON.parse(cacheParcial).urlBD;
+const sheetJson = JSON.parse(cacheParcial).sheetJson;
 
 var jsData;
 fetch(sheetJson)
@@ -191,6 +194,39 @@ function function_ID() {
               input.type = "datetime-local";
               input.value = extractDate(objetoFilaAEditar[header]);
 
+              function extractDate(string) {
+                if (isNaN(string.slice(-4))) return;
+                var meses = [
+                  "enero",
+                  "febrero",
+                  "marzo",
+                  "abril",
+                  "mayo",
+                  "junio",
+                  "julio",
+                  "agosto",
+                  "septiembre",
+                  "octubre",
+                  "noviembre",
+                  "diciembre",
+                ];
+                var [dia, mes, año] = string.split(" ");
+
+                var fecha = "YYYY-MM-DDThh:mm";
+                fecha = fecha.replace("hh:mm", "00:00");
+                fecha = fecha.replace("YYYY", año);
+                if (meses.indexOf(mes) + 1 < 10) {
+                  fecha = fecha.replace("MM", "0" + (meses.indexOf(mes) + 1));
+                } else {
+                  fecha = fecha.replace("MM", meses.indexOf(mes) + 1);
+                }
+                if (dia < 10) {
+                  fecha = fecha.replace("DD", "0" + dia);
+                } else {
+                  fecha = fecha.replace("DD", dia);
+                }
+                return fecha;
+              }
             } else if (header == "Dias_Vigentes") {
               input.value = '=NOW() - INDIRECT(CONCAT("C";ROW()))';
               input.setAttribute("readonly", "");
@@ -656,38 +692,3 @@ function editarManual() {
   document.querySelector("[name=Fecha_Finalizacion]").readOnly = false;
   document.querySelector("[name=Fecha_Finalizacion]").focus();
 }
-
-
-              function extractDate(string) {
-                if (isNaN(string.slice(-4))) return;
-                var meses = [
-                  "enero",
-                  "febrero",
-                  "marzo",
-                  "abril",
-                  "mayo",
-                  "junio",
-                  "julio",
-                  "agosto",
-                  "septiembre",
-                  "octubre",
-                  "noviembre",
-                  "diciembre",
-                ];
-                var [dia, mes, año] = string.split(" ");
-
-                var fecha = "YYYY-MM-DDThh:mm";
-                fecha = fecha.replace("hh:mm", "00:00");
-                fecha = fecha.replace("YYYY", año);
-                if (meses.indexOf(mes) + 1 < 10) {
-                  fecha = fecha.replace("MM", "0" + (meses.indexOf(mes) + 1));
-                } else {
-                  fecha = fecha.replace("MM", meses.indexOf(mes) + 1);
-                }
-                if (dia < 10) {
-                  fecha = fecha.replace("DD", "0" + dia);
-                } else {
-                  fecha = fecha.replace("DD", dia);
-                }
-                return fecha;
-              }
