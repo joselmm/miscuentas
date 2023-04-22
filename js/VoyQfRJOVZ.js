@@ -10,7 +10,11 @@ fetch(sheetJson)
     return res.text();
   })
   .then((txt) => {
-    var jsonData = txt.substr(txt.indexOf("(") + 1).slice(0, -2);
+    //console.log(txt);
+    var jsonData = txt.substring(txt.indexOf("(") + 1).slice(0, -2);
+    //text = txt;
+    //var jsonData = txt.substring(txt.indexOf("(") + 1, txt.length - 1).trim();
+    //var jsonData = JSON.parse(txt.match(/\((.*?)\)/)[1]);
     jsData = JSON.parse(jsonData);
     console.log("ya");
   })
@@ -692,3 +696,12 @@ function editarManual() {
   document.querySelector("[name=Fecha_Finalizacion]").readOnly = false;
   document.querySelector("[name=Fecha_Finalizacion]").focus();
 }
+
+document.querySelector("#button-log-out").onclick = () => {
+  var platformUrl =
+    localStorage.getItem("platform") || sessionStorage.getItem("platform");
+
+  localStorage.clear();
+  sessionStorage.clear();
+  location.href = "https://" + platformUrl;
+};
