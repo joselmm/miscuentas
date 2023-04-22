@@ -698,14 +698,13 @@ function editarManual() {
 }
 
 document.querySelector("#button-log-out").onclick = () => {
-  var platformUrl =
+  /*  var platformUrl =
     localStorage.getItem("platform") || sessionStorage.getItem("platform");
-
+ */
   localStorage.clear();
   sessionStorage.clear();
   //var urlHome = "https://" + platformUrl;
-  location.reload()
- /*  if (location.href.includes(urlHome)) {
+  parent.location.reload(); /*  if (location.href.includes(urlHome)) {
     location.reload();
     return;
   }
