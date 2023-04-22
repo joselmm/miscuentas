@@ -31,14 +31,21 @@
     <label for="passwordInput" class="form-label">Password</label>
     <input required type="password" class="form-control" id="passwordInput">
 <label  hidden id="aviso" class="form-label" style='color:red'>Credenciales Incorrectas</label>
+  
   </div>
-  <button id="submit-btn" type="submit" class="btn btn-primary">Submit</button>
+  <div class="mb-3">
+    <label for="keep-sesion" class="form-label">Mantener Sesion Abierta</label>
+    <input type="checkbox" id="keep-sesion">
+  </div>
+  <button id="submit-btn" type="submit" class="btn btn-primary">Log in</button>
 </form>
 
 
 <script type="text/javascript">
-
-  if (sessionStorage.length===0 ||  !sessionStorage.getItem("platform").includes("joselmm.github.io/miscuentas")){
+ var longitudDeDatos = sessionStorage.length || localStorage.length
+ console.log(longitudDeDatos)
+  //esto estaba incluido pero no se para qque en la condicion: ||  !sessionStorage.getItem("platform").includes("joselmm.github.io/miscuentas")
+  if (longitudDeDatos===0 ){
 	   var form=document.getElementById("login");
 	  form.hidden=false;
 var aviso = document.getElementById("aviso");	 
@@ -74,6 +81,12 @@ var aviso = document.getElementById("aviso");
  	sessionStorage.setItem("cache", JSON.stringify(json));
 	sessionStorage.setItem("platform", "joselmm.github.io/miscuentas");
   	}
+    var keepSesion = document.querySelector("#keep-sesion").checked
+    //alert(keepSesion)
+    if(json.res==="ok" && keepSesion){
+       	localStorage.setItem("cache", JSON.stringify(json));
+	      localStorage.setItem("platform", "joselmm.github.io/miscuentas");
+    }
 	if(json.res==='no'){
  		aviso.hidden=false;
 		setTimeout(()=>{aviso.hidden=true;},3000)
@@ -91,10 +104,22 @@ var aviso = document.getElementById("aviso");
 
   }
 
-  if(sessionStorage.length && sessionStorage.getItem("platform").includes("joselmm.github.io/miscuentas")){
-	  cache = JSON.parse(sessionStorage.getItem("cache"));
+  if(sessionStorage.length &&  sessionStorage.getItem("platform") ){
+    if(sessionStorage.getItem("platform").includes("joselmm.github.io/miscuentas")){
+    cache = JSON.parse(sessionStorage.getItem("cache"));
       $("#body").load(cache.prime);
       
+    }
+	    
+  }
+  
+   if(localStorage.length &&  localStorage.getItem("platform") ){
+    if(localStorage.getItem("platform").includes("joselmm.github.io/miscuentas")){
+    cache = JSON.parse(localStorage.getItem("cache"));
+      $("#body").load(cache.prime);
+      
+    }
+	    
   }
 </script>
 
